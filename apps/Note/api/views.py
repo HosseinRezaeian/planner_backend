@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from rest_framework.filters import BaseFilterBackend
 
 # Create your views here.
 
@@ -17,13 +18,17 @@ class NoteViewSet(ModelViewSet):
         return Note.objects.filter(space=space_key)
 
 
+class PathParameterSpaceAndHrWorkingBoardObjetsFilterBackend(BaseFilterBackend):
+
+    def filter_queryset(self, request, queryset, view):
+        space_id = view.kwargs['space_key']
+
+        return queryset.filter(space=space_id)
 class FolderViewSet(ModelViewSet):
     queryset = Folder.objects.all()
     serializer_class = FolderSerializer
+    filter_backends=[PathParameterSpaceAndHrWorkingBoardObjetsFilterBackend]
     def get_serializer_class(self):
         if self.action == 'retrieve':
             return FolderGetSerializer
         return FolderSerializer
-    def get_queryset(self):
-        space_key = self.kwargs.get('space_key')
-        return Folder.objects.filter(space=space_key)

@@ -22,6 +22,8 @@ class FolderSerializer(AbstractSerializer):
 
 class FolderGetSerializer(AbstractSerializer):
     notes = NoteSerializer(many=True, read_only=True)
+    creator = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    space=serializers.HiddenField(default=CurrentUrlSpaceSerializerField())
     class Meta:
         model = Folder
         fields = ['id','name','description','creator','notes','space']

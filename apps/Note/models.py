@@ -17,7 +17,7 @@ class Note(AbstractBaseModel):
     name = models.CharField(max_length=100)
     folder = models.ForeignKey(Folder, on_delete=models.CASCADE, related_name='notes',null=True)
     space = models.ForeignKey(Place, related_name='notes', on_delete=models.CASCADE)
-    content = models.TextField()
+    content = models.TextField(default="",blank=True,null=True)
 
 
 
