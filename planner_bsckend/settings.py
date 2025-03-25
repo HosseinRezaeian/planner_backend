@@ -24,8 +24,7 @@ SECRET_KEY = 'django-insecure-1e$7)+w4&^#2awpivt_gv%zwcfage&+5ec9qynv&=_54=jy(ea
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '*']
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -37,7 +36,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-
     'drf_spectacular',
     'corsheaders',
     'rest_framework',
@@ -45,12 +43,13 @@ INSTALLED_APPS = [
 
     'apps.Place',
     'apps.Account',
-    'apps.Todo',
     'apps.Note',
+    # 'apps.Todo',
+
 ]
 
 REST_FRAMEWORK = {
-'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_AUTHENTICATION_CLASSES': (
 
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
@@ -67,7 +66,7 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
     # OTHER SETTINGS
 }
-HASHID_FIELD_SALT="36f3af6226e0b5303e19b824e7442272"
+HASHID_FIELD_SALT = "36f3af6226e0b5303e19b824e7442272"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -80,8 +79,11 @@ MIDDLEWARE = [
 
 ]
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # React development server
-    "https://yourfrontend.com",  # Production domain
+    "http://localhost:3000",
+    "http://192.168.1.9:3000",
+    "http://192.168.43.194:3000",
+    # React development server
+
 ]
 ROOT_URLCONF = 'planner_bsckend.urls'
 
@@ -153,5 +155,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+CORS_ALLOW_CREDENTIALS = True
 SPACE_URL_SEPARATOR = '<str:space_key>'
